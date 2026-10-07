@@ -3,10 +3,11 @@ import os
 def get_files_info(working_directory: str, directory: str = ".") -> str:
     abs_path: str = os.path.abspath(working_directory)
     full_path: str = os.path.normpath(os.path.join(abs_path, directory))
+    print(f"working dir: {directory}\nfull_path: {full_path}")
     valid_target_dir: bool = os.path.commonpath([abs_path, full_path]) == abs_path
     if not valid_target_dir:
         return f'Error: Cannot list "{directory}" as it is outside the permitted working directory'
-    elif not os.path.isdir(full_path):
+    if not os.path.isdir(full_path):
         return f'Error: "{directory}" is not a directory'
     else:
         file_details: list[str] = []
