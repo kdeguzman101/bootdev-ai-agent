@@ -15,3 +15,21 @@ def get_files_info(working_directory: str, directory: str = ".") -> str:
             file_details.append(f"- {f}: file_size={os.path.getsize(full_path + "/" + f)} bytes, is_dir={os.path.isdir(full_path + "/" + f)}")
         print(f'Success: "{directory}" is within the working directory')
         return '\n'.join(file_details)
+
+schema_get_files_info = {
+    "type": "function",
+    "function": {
+        "name": "get_files_info",
+        "description": "Lists files in a specified directory relative to the working directory, providing file size and directory status",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "directory": {
+                    "type": "string",
+                    "description": "Directory path to list files from, relative to the working directory (default is the working directory itself)",
+                },
+            },
+        },
+        "required": ["directory"],
+    },
+}
